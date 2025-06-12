@@ -12,6 +12,7 @@ import { ClientsSection } from "@/components/sections/clients-section"
 import { TestimonialsSection } from "@/components/sections/testimonials-section"
 import { FAQSection } from "@/components/sections/faq-section"
 import { ContactSection } from "@/components/sections/contact-section"
+import { LiveChatButton } from "@/components/live-chat-button"
 
 // Import background effects
 import { QuantumGrid } from "@/components/effects/quantum-grid"
@@ -62,6 +63,9 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <Footer />
+      
+      {/* Live Chat Widget */}
+      <LiveChatButton />
     </div>
   )
 }

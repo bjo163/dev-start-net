@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Menu, X, Power, Wifi, Shield } from "lucide-react"
@@ -8,6 +8,27 @@ import { PrimaryButton } from "../shared/primary-button"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [currentTime, setCurrentTime] = useState<string>("")
+  const [isMounted, setIsMounted] = useState(false)
+
+  // Update time every second after component mounts
+  useEffect(() => {
+    setIsMounted(true)
+    
+    const updateTime = () => {
+      setCurrentTime(new Date().toLocaleTimeString([], { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: false 
+      }))
+    }
+    
+    updateTime() // Set initial time
+    const interval = setInterval(updateTime, 1000)
+    
+    return () => clearInterval(interval)
+  }, [])
 
   const navItems = [
     { name: "HOME", href: "#hero", code: "01" },
@@ -41,7 +62,9 @@ export function Navbar() {
           <div className="flex items-center space-x-4 hud-font-primary text-xs">
             <div className="hidden md:block">
               <span className="hud-label">SYSTEM_TIME:</span>
-              <span className="hud-value text-xs ml-2">{new Date().toLocaleTimeString()}</span>
+              <span className="hud-value text-xs ml-2">
+                {isMounted ? currentTime : "--:--:--"}
+              </span>
             </div>
             <div className="flex items-center space-x-2">
               <Power className="w-3 h-3 text-cyan-400" />

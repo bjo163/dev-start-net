@@ -688,3 +688,90 @@ html {
   background: linear-gradient(90deg, transparent, #00ff88, transparent);
   animation: moving-line 8s linear infinite;
 }
+
+/* Live Chat Widget - Always on top */
+.live-chat-widget {
+  position: fixed !important;
+  z-index: 2147483647 !important; /* Maximum z-index value */
+  pointer-events: auto !important;
+  isolation: isolate !important; /* Create new stacking context */
+  transform: translateZ(0) !important; /* Force hardware acceleration */
+  will-change: transform !important;
+}
+
+.live-chat-button {
+  position: fixed !important;
+  z-index: 2147483647 !important; /* Maximum z-index value */
+  pointer-events: auto !important;
+  isolation: isolate !important; /* Create new stacking context */
+  transform: translateZ(0) !important; /* Force hardware acceleration */
+  will-change: transform !important;
+}
+
+/* HUD Live Chat Specific Styles */
+.live-chat-widget::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(45deg, 
+    transparent, 
+    var(--hud-primary), 
+    transparent, 
+    var(--hud-accent), 
+    transparent
+  );
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.6;
+  animation: hud-border-scan 6s linear infinite;
+}
+
+.live-chat-widget .hud-scan-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Chat message animations */
+@keyframes hud-message-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.live-chat-widget .message-item {
+  animation: hud-message-appear 0.3s ease-out;
+}
+
+/* Typing indicator */
+@keyframes hud-typing-pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.live-chat-widget .typing-indicator {
+  animation: hud-typing-pulse 1.5s ease-in-out infinite;
+}

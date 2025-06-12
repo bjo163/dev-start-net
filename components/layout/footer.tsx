@@ -6,14 +6,30 @@ import Link from "next/link"
 import { MessageCircle, Mail, MapPin, Phone, Terminal, Cpu, Database, Wifi } from "lucide-react"
 
 export function Footer() {
-  const [systemTime, setSystemTime] = useState(new Date())
+  const [systemTime, setSystemTime] = useState<string>("")
+  const [currentYear, setCurrentYear] = useState<string>("")
   const [consoleActive, setConsoleActive] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setSystemTime(new Date())
-    }, 1000)
-
+    // Set mounted state to avoid hydration issues
+    setIsMounted(true)
+    
+    // Initialize time and year
+    const updateTime = () => {
+      setSystemTime(new Date().toLocaleTimeString([], { 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit',
+        hour12: false 
+      }))
+    }
+    
+    setCurrentYear(new Date().getFullYear().toString())
+    updateTime()
+    
+    // Update time every second
+    const timer = setInterval(updateTime, 1000)
     return () => clearInterval(timer)
   }, [])
 
@@ -201,7 +217,7 @@ export function Footer() {
             <div className="flex items-center space-x-2">
               <Terminal className="w-3 h-3 text-cyan-400" />
               <span className="hud-label">SYSTEM_TIME:</span>
-              <span className="hud-value">{systemTime.toLocaleTimeString()}</span>
+              <span className="hud-value">{isMounted ? systemTime : "--:--:--"}</span>
             </div>
           </div>
         </div>
@@ -222,7 +238,7 @@ export function Footer() {
 
           <div className="text-center">
             <div className="hud-font-primary text-xs md:text-sm text-gray-400">
-              <span className="hud-terminal">&copy;</span> {new Date().getFullYear()} Start-G. All rights reserved.
+              <span className="hud-terminal">&copy;</span> {isMounted ? currentYear : "2024"} Start-G. All rights reserved.
               <span className="text-red-500 mx-2">❤️</span>
               Made with <span className="hud-status-online">PASSION</span> for gamers.
             </div>

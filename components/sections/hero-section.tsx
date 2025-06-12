@@ -1,7 +1,25 @@
 "use client"
+import { useState, useEffect } from "react"
 import { Gamepad2, Zap, Shield, Target, Cpu, Database } from "lucide-react"
 
 export function HeroSection() {
+  const [isMounted, setIsMounted] = useState(false)
+  const [currentTime, setCurrentTime] = useState("")
+
+  useEffect(() => {
+    setIsMounted(true)
+    
+    const updateTime = () => {
+      setCurrentTime(new Date().toLocaleTimeString())
+    }
+    
+    updateTime() // Initial time
+    const interval = setInterval(updateTime, 1000)
+    
+    return () => clearInterval(interval)
+  }, [])
+
+  const displayTime = isMounted ? currentTime : "00:00:00"
   return (
     <section
       id="hero"
@@ -171,7 +189,7 @@ export function HeroSection() {
         <div className="flex justify-center">
           <div className="hud-panel px-3 md:px-6 py-2 md:py-3 w-full max-w-4xl">
             <div className="hud-font-primary text-xs flex flex-wrap items-center justify-center gap-2 md:gap-4">
-              <span className="hud-status-online">SYSTEM_TIME: {new Date().toLocaleTimeString()}</span>
+              <span className="hud-status-online">SYSTEM_TIME: {displayTime}</span>
               <span className="hidden sm:inline text-gray-500">|</span>
               <span className="hud-status-online">STATUS: OPERATIONAL</span>
               <span className="hidden sm:inline text-gray-500">|</span>
