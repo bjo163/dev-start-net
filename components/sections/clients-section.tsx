@@ -4,29 +4,34 @@ import Image from "next/image"
 export function ClientsSection() {
   const clients = [
     {
-      name: "Epic Arena",
-      logo: "/client-epic-arena.png",
-      description: "RF Online Private Server",
+      name: "RF Agoneris Dragon",
+      logo: "/client/rf_agonerisdrgn.png",
+      description: "Dragon-themed RF Online Private Server",
     },
     {
-      name: "Unity Technologies",
-      logo: "/client-unity.png",
-      description: "Game Engine Development",
+      name: "RF Agoneris Red",
+      logo: "/client/rf_agonerisred.png", 
+      description: "Premium RF Online Gaming Experience",
     },
     {
-      name: "Epic52",
-      logo: "/client-epic52.png",
-      description: "Gaming Community",
+      name: "RF Aspirant",
+      logo: "/client/rf_aspirant.png",
+      description: "High-Performance RF Online Server",
     },
     {
-      name: "BigWar",
-      logo: "/client-bigwar.png",
-      description: "MMORPG Server Network",
+      name: "RF Kaizen",
+      logo: "/client/rf_kaizen.png",
+      description: "Continuous Improvement Gaming Platform",
     },
     {
-      name: "RFace",
-      logo: "/client-rface.png",
-      description: "RF Online Platform",
+      name: "RF Warden V2",
+      logo: "/client/rf_wardenv2.png",
+      description: "Next-Gen RF Online Experience",
+    },
+    {
+      name: "RF Warden V3",
+      logo: "/client/rf_wardenv3.png",
+      description: "Advanced RF Online Gaming Network",
     },
   ]
 
@@ -34,8 +39,8 @@ export function ClientsSection() {
     <section className="py-20 relative">
       <div className="container mx-auto px-4">
         <SectionTitle
-          title="Our Trusted Clients"
-          subtitle="Leading gaming companies and communities that trust Start-G for their development needs"
+          title="Our RF Online Partners"
+          subtitle="Successful RF Online private servers and gaming communities powered by Start-G technology"
           sectionCode="CLIENTS"
         />
 
@@ -43,11 +48,11 @@ export function ClientsSection() {
         <div className="hud-panel p-4 md:p-6 mb-12 max-w-4xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="hud-panel p-3">
-              <div className="hud-font-display text-2xl md:text-3xl text-cyan-400 hud-text-glow mb-1">50+</div>
+              <div className="hud-font-display text-2xl md:text-3xl text-cyan-400 hud-text-glow mb-1">60+</div>
               <div className="hud-label text-xs">ACTIVE_CLIENTS</div>
             </div>
             <div className="hud-panel p-3">
-              <div className="hud-font-display text-2xl md:text-3xl text-cyan-400 hud-text-glow mb-1">100+</div>
+              <div className="hud-font-display text-2xl md:text-3xl text-cyan-400 hud-text-glow mb-1">150+</div>
               <div className="hud-label text-xs">PROJECTS_COMPLETED</div>
             </div>
             <div className="hud-panel p-3">
@@ -61,8 +66,8 @@ export function ClientsSection() {
           </div>
         </div>
 
-        {/* Client Logos Grid - Updated for 5 clients */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-12">
+        {/* Client Logos Grid - Updated for 6 clients */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 mb-12">
           {clients.map((client, index) => (
             <div
               key={index}
@@ -99,26 +104,26 @@ export function ClientsSection() {
 
         {/* Partnership Benefits */}
         <div className="hud-panel p-6 md:p-8 text-center">
-          <div className="hud-label mb-4">[PARTNERSHIP_BENEFITS]</div>
+          <div className="hud-label mb-4">[RF_PARTNERSHIP_BENEFITS]</div>
           <h3 className="hud-font-display text-xl md:text-2xl text-cyan-400 hud-text-glow mb-4">
-            JOIN OUR SUCCESS NETWORK
+            JOIN OUR RF ONLINE NETWORK
           </h3>
           <p className="hud-font-primary text-sm md:text-base text-gray-300 mb-6 max-w-3xl mx-auto">
-            Partner with Start-G and join a network of successful gaming companies. We provide dedicated support,
-            priority development, and exclusive access to our latest technologies and innovations.
+            Partner with Start-G and join a network of successful RF Online private servers. We provide dedicated hosting,
+            custom development, and exclusive access to our latest RF Online enhancements and features.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="hud-panel p-4">
-              <div className="hud-label text-xs mb-2">PRIORITY_SUPPORT</div>
-              <div className="hud-font-primary text-sm text-cyan-400">24/7 Dedicated Team</div>
+              <div className="hud-label text-xs mb-2">DEDICATED_HOSTING</div>
+              <div className="hud-font-primary text-sm text-cyan-400">24/7 RF Server Support</div>
             </div>
             <div className="hud-panel p-4">
-              <div className="hud-label text-xs mb-2">EXCLUSIVE_ACCESS</div>
-              <div className="hud-font-primary text-sm text-cyan-400">Latest Technologies</div>
+              <div className="hud-label text-xs mb-2">CUSTOM_FEATURES</div>
+              <div className="hud-font-primary text-sm text-cyan-400">Unique RF Modifications</div>
             </div>
             <div className="hud-panel p-4">
-              <div className="hud-label text-xs mb-2">CUSTOM_SOLUTIONS</div>
-              <div className="hud-font-primary text-sm text-cyan-400">Tailored Development</div>
+              <div className="hud-label text-xs mb-2">SERVER_MANAGEMENT</div>
+              <div className="hud-font-primary text-sm text-cyan-400">Complete RF Solutions</div>
             </div>
           </div>
         </div>
