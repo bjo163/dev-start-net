@@ -1,0 +1,690 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* HUD Color Variables */
+    --hud-primary: #00ffff;
+    --hud-secondary: #0088ff;
+    --hud-accent: #00ff88;
+    --hud-warning: #ffaa00;
+    --hud-danger: #ff0044;
+    --hud-bg-primary: rgba(0, 0, 0, 0.9);
+    --hud-bg-secondary: rgba(0, 255, 255, 0.05);
+    --hud-border: rgba(0, 255, 255, 0.3);
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Share Tech Mono", monospace;
+    background: linear-gradient(to bottom, #001a2c, #000000);
+    color: #00ffff;
+    overflow-x: hidden;
+  }
+
+  /* HUD Typography */
+  .hud-font-primary {
+    font-family: "Share Tech Mono", monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .hud-font-title {
+    font-family: "Orbitron", monospace;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hud-font-display {
+    font-family: "Orbitron", monospace;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* HUD Text Effects */
+  .hud-text-glow {
+    color: var(--hud-primary);
+    text-shadow: 0 0 5px var(--hud-primary), 0 0 10px var(--hud-primary), 0 0 15px var(--hud-primary);
+  }
+
+  .hud-text-pulse {
+    animation: hud-pulse-text 2s ease-in-out infinite;
+  }
+
+  .hud-text-flicker {
+    animation: hud-flicker 0.15s infinite linear;
+  }
+
+  .hud-text-scan {
+    background: linear-gradient(90deg, transparent 0%, var(--hud-primary) 50%, transparent 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hud-scan-text 3s linear infinite;
+  }
+
+  /* HUD Heading Styles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Orbitron", monospace;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--hud-primary);
+  }
+
+  /* HUD Paragraph Styles */
+  p {
+    font-family: "Share Tech Mono", monospace;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    color: #a0a0a0;
+  }
+
+  /* HUD Code/Terminal Text */
+  .hud-terminal {
+    font-family: "Share Tech Mono", monospace;
+    color: #00ff88;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    border-radius: 2px;
+    text-shadow: 0 0 5px #00ff88;
+  }
+
+  /* HUD Labels */
+  .hud-label {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.75rem;
+    color: var(--hud-primary);
+    opacity: 0.8;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* HUD Values */
+  .hud-value {
+    font-family: "Orbitron", monospace;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 5px var(--hud-primary);
+  }
+}
+
+/* Custom HUD Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 1px solid var(--hud-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--hud-primary), var(--hud-secondary));
+  border: 1px solid var(--hud-primary);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ccff, #0066aa);
+  box-shadow: 0 0 5px var(--hud-primary);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* HUD Animations */
+@keyframes hud-pulse-text {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 5px var(--hud-primary);
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 20px var(--hud-primary), 0 0 30px var(--hud-primary);
+  }
+}
+
+@keyframes hud-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes hud-scan-text {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes hud-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 5px var(--hud-primary), 0 0 10px var(--hud-primary);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--hud-primary), 0 0 30px var(--hud-primary), 0 0 40px var(--hud-primary);
+  }
+}
+
+@keyframes hud-border-scan {
+  0% {
+    border-color: var(--hud-primary);
+    box-shadow: 0 0 5px var(--hud-primary);
+  }
+  25% {
+    border-color: var(--hud-accent);
+    box-shadow: 0 0 5px var(--hud-accent);
+  }
+  50% {
+    border-color: var(--hud-secondary);
+    box-shadow: 0 0 5px var(--hud-secondary);
+  }
+  75% {
+    border-color: var(--hud-accent);
+    box-shadow: 0 0 5px var(--hud-accent);
+  }
+  100% {
+    border-color: var(--hud-primary);
+    box-shadow: 0 0 5px var(--hud-primary);
+  }
+}
+
+@keyframes hud-data-stream {
+  0% {
+    transform: translateX(-100%) translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw) translateY(-20px);
+    opacity: 0;
+  }
+}
+
+@keyframes hud-terminal-cursor {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hud-scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes moving-line {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 200%;
+    opacity: 0;
+  }
+}
+
+/* HUD Component Classes */
+.hud-panel {
+  background: var(--hud-bg-primary);
+  border: 2px solid var(--hud-border);
+  backdrop-filter: blur(10px);
+  position: relative;
+  border-radius: 4px;
+}
+
+.hud-panel::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, var(--hud-border), transparent);
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.5;
+}
+
+.hud-panel-active {
+  animation: hud-border-scan 4s linear infinite;
+}
+
+.hud-button {
+  position: relative;
+  overflow: hidden;
+  background: var(--hud-bg-secondary);
+  border: 2px solid var(--hud-border);
+  color: var(--hud-primary);
+  font-family: "Share Tech Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+}
+
+.hud-button:hover {
+  background: rgba(0, 255, 255, 0.1);
+  border-color: var(--hud-primary);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  transform: translateY(-2px);
+  text-shadow: 0 0 5px var(--hud-primary);
+}
+
+.hud-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.hud-button:hover::before {
+  left: 100%;
+}
+
+.hud-button::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid var(--hud-primary);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hud-button:hover::after {
+  opacity: 0.5;
+}
+
+/* HUD Input Styles */
+.hud-input {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--hud-border);
+  color: var(--hud-primary);
+  font-family: "Share Tech Mono", monospace;
+  padding: 0.75rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hud-input:focus {
+  outline: none;
+  border-color: var(--hud-primary);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 5px var(--hud-primary);
+}
+
+.hud-input::placeholder {
+  color: rgba(0, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+/* HUD Progress Bar */
+.hud-progress {
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--hud-border);
+  height: 8px;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hud-progress-fill {
+  background: linear-gradient(90deg, var(--hud-secondary), var(--hud-primary), var(--hud-secondary));
+  height: 100%;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.hud-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: hud-scan-line 2s linear infinite;
+}
+
+/* HUD Status Indicators */
+.hud-status-online {
+  color: var(--hud-accent);
+  text-shadow: 0 0 5px var(--hud-accent);
+}
+
+.hud-status-warning {
+  color: var(--hud-warning);
+  text-shadow: 0 0 5px var(--hud-warning);
+}
+
+.hud-status-danger {
+  color: var(--hud-danger);
+  text-shadow: 0 0 5px var(--hud-danger);
+}
+
+/* Price specific styling */
+.hud-price {
+  color: #00ff88;
+  text-shadow: 0 0 5px #00ff88, 0 0 10px #00ff88;
+}
+
+/* HUD Grid System */
+.hud-grid {
+  background-image: linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Mobile specific HUD Grid */
+@media (max-width: 768px) {
+  .hud-grid {
+    background-size: 15px 15px;
+    opacity: 0.15 !important;
+  }
+
+  /* Fix mobile top spacing */
+  #hero {
+    padding-top: 6rem !important;
+  }
+
+  .hud-panel {
+    border-width: 1px;
+  }
+
+  .hud-button {
+    padding: 0.5rem 1rem;
+    border-width: 1px;
+  }
+
+  .hud-font-display {
+    letter-spacing: 0.1em;
+  }
+
+  .hud-text-glow {
+    text-shadow: 0 0 3px var(--hud-primary), 0 0 6px var(--hud-primary), 0 0 9px var(--hud-primary);
+  }
+}
+
+/* HUD Scan Lines */
+.hud-scan-lines {
+  position: relative;
+}
+
+.hud-scan-lines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 255, 0.03) 2px,
+    rgba(0, 255, 255, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Mobile specific scan lines */
+@media (max-width: 768px) {
+  .hud-scan-lines::before {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(0, 255, 255, 0.05) 1px,
+      rgba(0, 255, 255, 0.05) 2px
+    );
+  }
+}
+
+/* HUD Corner Brackets */
+.hud-corners::before,
+.hud-corners::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--hud-primary);
+}
+
+.hud-corners::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corners::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* HUD Holographic Effect */
+.hud-holographic {
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(0, 136, 255, 0.1), rgba(0, 255, 255, 0.1));
+  background-size: 200% 200%;
+  animation: hud-holographic 3s ease-in-out infinite;
+}
+
+@keyframes hud-holographic {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Custom Selection */
+::selection {
+  background: rgba(0, 255, 255, 0.3);
+  color: #ffffff;
+  text-shadow: 0 0 5px var(--hud-primary);
+}
+
+::-moz-selection {
+  background: rgba(0, 255, 255, 0.3);
+  color: #ffffff;
+  text-shadow: 0 0 5px var(--hud-primary);
+}
+
+/* Utility Classes */
+.animate-hud-pulse {
+  animation: hud-glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-hud-flicker {
+  animation: hud-flicker 0.15s infinite linear;
+}
+
+.animate-hud-scan {
+  animation: hud-scan-text 3s linear infinite;
+}
+
+.animate-hud-border {
+  animation: hud-border-scan 4s linear infinite;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .hud-panel {
+    border-width: 1px;
+  }
+
+  .hud-button {
+    padding: 0.5rem 1rem;
+    border-width: 1px;
+  }
+
+  .hud-font-display {
+    letter-spacing: 0.1em;
+  }
+
+  .hud-text-glow {
+    text-shadow: 0 0 3px var(--hud-primary), 0 0 6px var(--hud-primary), 0 0 9px var(--hud-primary);
+  }
+}
+
+/* Ensure HUD effects are visible on mobile */
+@media (max-width: 1024px) {
+  body {
+    cursor: default !important;
+  }
+
+  /* Keep HUD effects visible on mobile */
+  .hud-panel,
+  .hud-corners,
+  .hud-scan-lines {
+    display: block !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .hud-panel,
+  .hud-corners,
+  .hud-scan-lines,
+  .hud-button {
+    display: none !important;
+  }
+}
+
+/* Add the moving green lines effect */
+.moving-lines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.15;
+}
+
+.moving-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00ff88, transparent);
+  animation: moving-line 8s linear infinite;
+}
