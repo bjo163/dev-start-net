@@ -4,12 +4,12 @@ import { useEffect, useState } from "react"
 import { useIdleDetection } from "@/hooks/use-idle-detection"
 import { useDesktopOnly } from "@/hooks/use-desktop-only"
 
+const terminalMessages = ["SYSTEM READY", "NEURAL NET ACTIVE", "ALL SYSTEMS NOMINAL", "STANDBY MODE"]
+
 export function TerminalOverlay() {
   const [logs, setLogs] = useState<string[]>([])
   const isIdle = useIdleDetection(10000) // 10 seconds
   const isDesktop = useDesktopOnly(1024) // Show on screens 1024px and above
-
-  const terminalMessages = ["SYSTEM READY", "NEURAL NET ACTIVE", "ALL SYSTEMS NOMINAL", "STANDBY MODE"]
 
   useEffect(() => {
     const interval = setInterval(() => {

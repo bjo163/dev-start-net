@@ -27,35 +27,26 @@ async function generateSessionId(): Promise<string> {
     }
 
     const userAgent = navigator.userAgent
-    let clientIP = ''
-
-    // Try to get real IP
+    let clientIP = ''    // Try to get real IP
     try {
-      console.log('🔍 Trying to get real IP address...')
       const response = await fetch('https://api.ipify.org?format=json')
       if (response.ok) {
         const data = await response.json()
         clientIP = data.ip
-        console.log('✅ Got real IP:', clientIP)
-      }
-    } catch (error) {
-      console.warn('❌ Failed to get IP, using fallback')
+      }    } catch {
       clientIP = `fallback_${Date.now()}`
     }
 
     // Generate hash
     const combined = clientIP + userAgent
-    console.log('🔑 Generating session with IP:', clientIP)
-    console.log('📝 Combined length:', combined.length)
 
     if (window.crypto && window.crypto.subtle) {
       const encoder = new TextEncoder()
-      const data = encoder.encode(combined)
+            const data = encoder.encode(combined)
       const hashBuffer = await window.crypto.subtle.digest('SHA-256', data)
       const hashArray = Array.from(new Uint8Array(hashBuffer))
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
       const sessionId = hashHex.substring(0, 16)
-      console.log('🔐 Generated Session ID:', sessionId)
       return sessionId
     } else {
       // Simple fallback
@@ -66,11 +57,8 @@ async function generateSessionId(): Promise<string> {
         hash = hash & hash
       }
       const sessionId = Math.abs(hash).toString(16).substring(0, 16)
-      console.log('🔐 Generated Session ID (fallback):', sessionId)
       return sessionId
-    }
-  } catch (error) {
-    console.error('❌ Error generating session:', error)
+    }  } catch {
     return Math.random().toString(36).substring(2, 18)
   }
 }
@@ -84,8 +72,7 @@ export async function getSessionId(): Promise<string> {
   return cachedSessionId
 }
 
-export async function sendChatMessage(message: string): Promise<ChatResponse> {
-  try {
+export async function sendChatMessage(message: string): Promise<ChatResponse> {  try {
     const sessionId = await getSessionId()
     
     const requestData = {
@@ -94,14 +81,11 @@ export async function sendChatMessage(message: string): Promise<ChatResponse> {
       agent_type: "custom"
     }
 
-    console.log('📤 Sending to API:', requestData)
-
     const response = await fetch('https://agx-api.apps.pundidigitaldynamics.net/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestData)
+      },      body: JSON.stringify(requestData)
     })
 
     if (!response.ok) {
@@ -109,10 +93,8 @@ export async function sendChatMessage(message: string): Promise<ChatResponse> {
     }
 
     const data = await response.json()
-    console.log('📥 API Response:', data)
     return data
-  } catch (error) {
-    console.error('Chat API Error:', error)
+  } catch {
     throw new Error('Failed to send message. Please try again.')
   }
 }

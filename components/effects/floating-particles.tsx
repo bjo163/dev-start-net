@@ -63,7 +63,7 @@ export function NeuralNetwork() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.03)"
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      neurons.forEach((neuron, i) => {
+      neurons.forEach((neuron) => {
         // Update position
         neuron.x += neuron.vx
         neuron.y += neuron.vy

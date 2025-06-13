@@ -54,7 +54,7 @@ export function AboutSection() {
           <div>
             <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Our Mission</h3>
             <p className="text-gray-300 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">
-              Start-G was founded with the vision of becoming Indonesia's leading game development studio. We believe
+              Start-G was founded with the vision of becoming Indonesia&apos;s leading game development studio. We believe
               that games are not just entertainment, but also a medium for storytelling, inspiring, and connecting
               people from all over the world.
             </p>

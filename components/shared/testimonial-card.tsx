@@ -20,7 +20,7 @@ export function TestimonialCard({ name, role, company, content, rating, avatar }
             <Star key={i} className={`w-4 h-4 ${i < rating ? "text-yellow-500 fill-current" : "text-gray-600"}`} />
           ))}
         </div>
-        <p className="text-gray-300 mb-6 italic">"{content}"</p>
+        <p className="text-gray-300 mb-6 italic">&ldquo;{content}&rdquo;</p>
         <div className="flex items-center">
           <Avatar className="mr-3">
             <AvatarImage src={avatar || "/placeholder.svg"} alt={name} />

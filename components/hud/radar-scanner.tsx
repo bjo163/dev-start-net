@@ -5,7 +5,7 @@ import { useIdleDetection } from "@/hooks/use-idle-detection"
 
 export function RadarScanner() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
   const isIdle = useIdleDetection(10000) // 10 seconds
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -102,7 +102,7 @@ export function RadarScanner() {
       ctx.restore()
 
       // Draw blips with fade effect
-      blips.forEach((blip, index) => {
+      blips.forEach((blip) => {
         const blipAngle = blip.angle + time * 0.1
         const blipX = centerX + Math.cos(blipAngle) * blip.radius
         const blipY = centerY + Math.sin(blipAngle) * blip.radius

@@ -283,6 +283,8 @@ export function SoundEffectSimulator() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   const playSound = (type: string) => {
+    // Simulate sound effect with type parameter
+    console.log(`Playing ${type} sound`)
     setIsPlaying(true)
     // Simulate sound effect
     setTimeout(() => setIsPlaying(false), 500)

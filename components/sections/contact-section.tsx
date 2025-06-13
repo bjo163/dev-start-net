@@ -35,13 +35,13 @@ export function ContactSection() {
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Contact Us"
-          subtitle="Ready to bring your game idea to life? Let's discuss your dream project with the Start-G team"
+          subtitle="Ready to bring your game idea to life? Let&apos;s discuss your dream project with the Start-G team"
           sectionCode="CONTACT"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           <div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Let's Collaborate!</h3>
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">Let&apos;s Collaborate!</h3>
             <p className="text-gray-300 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
               Have a cool game idea? Or need help developing an existing project? The Start-G team is ready to help
               realize your game vision with cutting-edge technology and unlimited creativity.

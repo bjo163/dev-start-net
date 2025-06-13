@@ -11,7 +11,6 @@ export function LiveChatButton() {
   const [message, setMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [sessionId, setSessionId] = useState<string | null>(null)
-  const [debugInfo, setDebugInfo] = useState<string>("")
   const [isMounted, setIsMounted] = useState(false)
   const [messages, setMessages] = useState<ChatMessage[]>([])
 
@@ -43,8 +42,6 @@ export function LiveChatButton() {
           
           // Add debug info to first message
           if (id) {
-            setDebugInfo(`Session ID: ${id}`)
-            
             // Add system message with session info
             const systemMessage: ChatMessage = {
               id: 'debug-session',
@@ -55,8 +52,8 @@ export function LiveChatButton() {
             
             setMessages(prev => [...prev, systemMessage])
           }
-        } catch (error) {
-          console.error('Error getting session:', error)
+        } catch {
+          // Session creation failed, continue without session ID
         }
       }, 2000)
     }
@@ -97,9 +94,7 @@ export function LiveChatButton() {
       }
 
       setMessages(prev => [...prev, botMessage])
-    } catch (error) {
-      console.error('Error sending message:', error)
-      
+    } catch {
       // Add error message
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),

@@ -1,12 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useIdleDetection } from "@/hooks/use-idle-detection"
 
 export function TargetingCrosshair() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [isActive, setIsActive] = useState(false)
-  const isIdle = useIdleDetection(10000) // 10 seconds
   const [isDesktop, setIsDesktop] = useState(false)
 
   // Check if desktop on client side

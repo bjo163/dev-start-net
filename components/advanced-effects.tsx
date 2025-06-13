@@ -91,7 +91,7 @@ export function NeuralNetworkPattern({ className = "" }: { className?: string })
       // Draw connections
       ctx.strokeStyle = "#3B82F6"
       ctx.lineWidth = 2
-      nodes.forEach((node, index) => {
+      nodes.forEach((node) => {
         node.connections.forEach((connectionIndex) => {
           const targetNode = nodes[connectionIndex]
           if (targetNode) {
