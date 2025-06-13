@@ -11,10 +11,10 @@ interface SectionTitleProps {
 
 export function SectionTitle({ title, subtitle, className, centered = true, sectionCode }: SectionTitleProps) {
   return (
-    <div className={cn("mb-12", centered && "text-center", className)}>
-      <div className="relative inline-block">
+    <div className={cn("mb-12 w-full", centered && "text-center", className)}>
+      <div className="relative w-full">
         {/* Section Header Panel */}
-        <div className="hud-panel p-6 max-w-4xl mx-auto">
+        <div className="hud-panel p-4 md:p-6 w-full max-w-5xl mx-auto">
           {/* Section Code */}
           <div className="flex items-center justify-center mb-4">
             <Target className="w-4 h-4 text-cyan-400 mr-2" />
@@ -23,7 +23,7 @@ export function SectionTitle({ title, subtitle, className, centered = true, sect
           </div>
 
           {/* Main Title */}
-          <h2 className="hud-font-display text-3xl md:text-4xl xl:text-5xl mb-4">
+          <h2 className="hud-font-display text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-4 break-all">
             <span className="hud-text-glow">{title.toUpperCase().replace(/ /g, "_")}</span>
           </h2>
 

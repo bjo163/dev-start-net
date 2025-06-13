@@ -5,11 +5,18 @@ import Image from "next/image"
 import Link from "next/link"
 import { Menu, X, Power, Wifi, Shield } from "lucide-react"
 import { PrimaryButton } from "../shared/primary-button"
+import { SectionTransition } from "../effects/section-transition"
+import { useSectionTransition } from "../../hooks/use-section-transition"
+import { useSystemInfo } from "../../hooks/use-system-info"
+import { useNetworkStats } from "../../hooks/use-network-stats"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [currentTime, setCurrentTime] = useState<string>("")
   const [isMounted, setIsMounted] = useState(false)
+  const { isTransitioning, targetSection, navigateToSection } = useSectionTransition()
+  const { ipAddress, browserName, osName, connectionType, ispName, isLoading } = useSystemInfo()
+  const { ping, isLoading: pingLoading } = useNetworkStats()
 
   // Update time every second after component mounts
   useEffect(() => {
@@ -31,38 +38,65 @@ export function Navbar() {
   }, [])
 
   const navItems = [
-    { name: "HOME", href: "#hero", code: "01" },
-    { name: "ABOUT", href: "#about", code: "02" },
-    { name: "SERVICES", href: "#services", code: "03" },
-    { name: "PORTFOLIO", href: "#portfolio", code: "04" },
-    { name: "SHOP", href: "#shop", code: "05" },
-    { name: "CONTACT", href: "#contact", code: "06" },
+    { name: "HOME", href: "#hero" },
+    { name: "ABOUT", href: "#about" },
+    { name: "SERVICES", href: "#services" },
+    { name: "PORTFOLIO", href: "#portfolio" },
+    { name: "SHOP", href: "#shop" },
+    { name: "CONTACT", href: "#contact" },
   ]
 
+  const handleNavClick = (href: string, name: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    navigateToSection(href, name)
+  }
+
   return (
-    <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-md border-b-2 border-cyan-500/30 z-50">
+    <>
+      <SectionTransition isActive={isTransitioning} targetSection={targetSection} />
+      <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-md border-b-2 border-cyan-500/30 z-50">
       <div className="container mx-auto px-4">
         {/* HUD Status Bar */}
         <div className="flex justify-between items-center py-2 border-b border-cyan-500/20">
-          <div className="flex items-center space-x-3 md:space-x-6 hud-font-primary text-xs">
+          <div className="flex items-center space-x-2 md:space-x-4 lg:space-x-6 hud-font-primary text-xs">
             <div className="flex items-center space-x-2">
               <Shield className="w-3 h-3 text-cyan-400" />
               <span className="hud-status-online">SECURE</span>
             </div>
             <div className="flex items-center space-x-2">
               <Wifi className="w-3 h-3 text-cyan-400" />
-              <span className="hud-status-online">CONNECTED</span>
+              <span className="hud-status-online">{connectionType}</span>
             </div>
             <div className="hidden md:flex items-center space-x-2">
               <span className="hud-label">PING:</span>
-              <span className="hud-value text-xs">12ms</span>
+              <span className="hud-value text-xs">
+                {pingLoading ? "..." : `${ping}ms`}
+              </span>
+            </div>
+            <div className="hidden lg:flex items-center space-x-2">
+              <span className="hud-label">ISP:</span>
+              <span className="hud-value text-xs">{ispName}</span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-4 hud-font-primary text-xs">
-            <div className="hidden md:block">
-              <span className="hud-label">SYSTEM_TIME:</span>
-              <span className="hud-value text-xs ml-2">
+          <div className="flex items-center space-x-2 md:space-x-3 lg:space-x-4 hud-font-primary text-xs">
+            <div className="hidden lg:flex items-center space-x-2">
+              <span className="hud-label">CLIENT_IP:</span>
+              <span className="hud-value text-xs">
+                {isLoading ? "RESOLVING..." : ipAddress}
+              </span>
+            </div>
+            <div className="hidden xl:flex items-center space-x-2">
+              <span className="hud-label">OS:</span>
+              <span className="hud-value text-xs">{osName}</span>
+            </div>
+            <div className="hidden xl:flex items-center space-x-2">
+              <span className="hud-label">BROWSER:</span>
+              <span className="hud-value text-xs">{browserName}</span>
+            </div>
+            <div className="hidden md:flex items-center space-x-2">
+              <span className="hud-label">TIME:</span>
+              <span className="hud-value text-xs">
                 {isMounted ? currentTime : "--:--:--"}
               </span>
             </div>
@@ -98,17 +132,16 @@ export function Navbar() {
           {/* Navigation with HUD Style */}
           <div className="hidden md:flex items-center space-x-1 md:space-x-2">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.name}
-                href={item.href}
+                onClick={(e) => handleNavClick(item.href, item.name, e)}
                 className="group relative hud-panel px-3 py-2 md:px-4 md:py-3 hover:hud-panel-active transition-all duration-300"
               >
-                <div className="hud-label text-xs opacity-60">[{item.code}]</div>
                 <div className="hud-font-primary text-xs md:text-sm text-cyan-300 group-hover:hud-text-glow">
                   {item.name}
                 </div>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></div>
-              </Link>
+              </button>
             ))}
           </div>
 
@@ -145,14 +178,16 @@ export function Navbar() {
             <div className="hud-label mb-4">[NAVIGATION_MENU]</div>
             <div className="space-y-3">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.name}
-                  href={item.href}
-                  className="block hud-font-primary text-cyan-300 hover:hud-text-glow transition-colors border-l-2 border-transparent hover:border-cyan-400 pl-3"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    handleNavClick(item.href, item.name, e)
+                    setIsOpen(false)
+                  }}
+                  className="block w-full text-left hud-font-primary text-cyan-300 hover:hud-text-glow transition-colors border-l-2 border-transparent hover:border-cyan-400 pl-3"
                 >
-                  <span className="hud-label text-xs">[{item.code}]</span> {item.name}
-                </Link>
+                  {item.name}
+                </button>
               ))}
 
               <div className="border-t border-cyan-500/20 pt-4 space-y-3">
@@ -177,5 +212,6 @@ export function Navbar() {
         )}
       </div>
     </nav>
+    </>
   )
 }

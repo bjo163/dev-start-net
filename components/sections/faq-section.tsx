@@ -55,8 +55,8 @@ export function FAQSection() {
   }
 
   return (
-    <section className="py-20 relative">
-      <div className="container mx-auto px-4">
+    <section className="py-20 relative overflow-hidden">
+      <div className="container mx-auto px-4 max-w-6xl">
         <SectionTitle
           title="Frequently Asked Questions"
           subtitle="Questions frequently asked about our game development services"

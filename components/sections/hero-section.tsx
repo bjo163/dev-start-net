@@ -75,10 +75,10 @@ export function HeroSection() {
         <div className="relative mb-6 md:mb-8">
           <div className="hud-panel p-4 md:p-8 w-full max-w-6xl mx-auto">
             {/* Mission Header */}
-            <div className="flex items-center justify-center mb-3 md:mb-4">
-              <Target className="w-3 h-3 md:w-5 md:h-5 text-cyan-400 mr-2" />
-              <span className="hud-label text-xs">[MISSION_OBJECTIVE_ALPHA]</span>
-              <Target className="w-3 h-3 md:w-5 md:h-5 text-cyan-400 ml-2" />
+            <div className="flex items-center justify-center mb-3 md:mb-4 overflow-hidden">
+              <Target className="w-3 h-3 md:w-5 md:h-5 text-cyan-400 mr-2 flex-shrink-0" />
+              <span className="hud-label text-xs break-all">[MISSION_OBJ_ALPHA]</span>
+              <Target className="w-3 h-3 md:w-5 md:h-5 text-cyan-400 ml-2 flex-shrink-0" />
             </div>
 
             {/* Main Title - Fixed responsive sizing */}
@@ -92,10 +92,10 @@ export function HeroSection() {
             </h1>
 
             {/* Status Indicator */}
-            <div className="flex items-center justify-center mt-3 md:mt-4">
-              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-cyan-400 rounded-full animate-pulse mr-2"></div>
-              <span className="hud-label hud-status-online text-xs">[STATUS: READY_TO_DEPLOY]</span>
-              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-cyan-400 rounded-full animate-pulse ml-2"></div>
+            <div className="flex items-center justify-center mt-3 md:mt-4 overflow-hidden">
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-cyan-400 rounded-full animate-pulse mr-2 flex-shrink-0"></div>
+              <span className="hud-label hud-status-online text-xs break-all">[STATUS: READY]</span>
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-cyan-400 rounded-full animate-pulse ml-2 flex-shrink-0"></div>
             </div>
           </div>
         </div>
@@ -103,13 +103,13 @@ export function HeroSection() {
         {/* System Description Terminal - Mobile optimized */}
         <div className="relative mb-8 md:mb-12">
           <div className="hud-panel p-3 md:p-6 w-full max-w-4xl mx-auto">
-            <div className="flex items-center mb-3 md:mb-4">
-              <Database className="w-3 h-3 md:w-4 md:h-4 text-cyan-400 mr-2" />
-              <span className="hud-label text-xs">[SYSTEM_DESCRIPTION]</span>
+            <div className="flex items-center mb-3 md:mb-4 overflow-hidden">
+              <Database className="w-3 h-3 md:w-4 md:h-4 text-cyan-400 mr-2 flex-shrink-0" />
+              <span className="hud-label text-xs break-all">[SYS_DESC]</span>
             </div>
 
             <div className="hud-font-primary text-left space-y-1 md:space-y-2">
-              <div className="hud-terminal inline-block text-xs">&gt; INITIALIZING_GAME_DEVELOPMENT_PROTOCOL...</div>
+              <div className="hud-terminal inline-block text-xs">&gt; INITIALIZING_GAME_DEV_PROTOCOL...</div>
               <p className="text-gray-300 text-xs md:text-base leading-relaxed">
                 &gt; WE_CREATE_IMMERSIVE_GAMING_EXPERIENCES
                 <br />

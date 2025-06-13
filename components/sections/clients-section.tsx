@@ -104,7 +104,7 @@ export function ClientsSection() {
 
         {/* Partnership Benefits */}
         <div className="hud-panel p-6 md:p-8 text-center">
-          <div className="hud-label mb-4">[RF_PARTNERSHIP_BENEFITS]</div>
+          <div className="hud-label mb-4 break-all">[RF_PARTNERSHIP]</div>
           <h3 className="hud-font-display text-xl md:text-2xl text-cyan-400 hud-text-glow mb-4">
             JOIN OUR RF ONLINE NETWORK
           </h3>

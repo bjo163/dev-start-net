@@ -107,6 +107,9 @@
   .hud-text-glow {
     color: var(--hud-primary);
     text-shadow: 0 0 5px var(--hud-primary), 0 0 10px var(--hud-primary), 0 0 15px var(--hud-primary);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   .hud-text-pulse {
@@ -167,6 +170,9 @@
     opacity: 0.8;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   /* HUD Values */
@@ -305,9 +311,14 @@ html {
 @keyframes hud-scan-line {
   0% {
     transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
   100% {
-    transform: translateY(100vh);
+    transform: translateY(100%);
+    opacity: 0;
   }
 }
 
@@ -328,6 +339,96 @@ html {
   }
 }
 
+/* Page Loader Animations */
+@keyframes loader-fade-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+    pointer-events: none;
+  }
+}
+
+.page-loader-exit {
+  animation: loader-fade-out 0.8s ease-out forwards;
+}
+
+/* Enhanced scanner animation for page loader */
+.page-scanner-animation {
+  animation: scanner-rotate 2s linear infinite;
+}
+
+/* Loading stage transitions */
+@keyframes stage-transition {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loading-stage-enter {
+  animation: stage-transition 0.3s ease-out;
+}
+
+/* Section Transition Effects */
+@keyframes scanner-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes data-stream {
+  0%,
+  100% {
+    height: 10px;
+    opacity: 0.3;
+  }
+  50% {
+    height: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes progress-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.scan-line {
+  animation: hud-scan-line 2s ease-in-out infinite;
+}
+
+.scanner-animation {
+  animation: scanner-rotate 2s linear infinite;
+}
+
+.data-stream-bar {
+  animation: data-stream 0.8s ease-in-out infinite;
+}
+
+.progress-glow {
+  animation: progress-pulse 1s ease-in-out infinite;
+}
+
 /* HUD Component Classes */
 .hud-panel {
   background: var(--hud-bg-primary);
@@ -335,6 +436,9 @@ html {
   backdrop-filter: blur(10px);
   position: relative;
   border-radius: 4px;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .hud-panel::before {
@@ -774,4 +878,15 @@ html {
 
 .live-chat-widget .typing-indicator {
   animation: hud-typing-pulse 1.5s ease-in-out infinite;
+}
+
+/* Section transition overlay */
+.section-transition-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.95) 0%,
+    rgba(0, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  backdrop-filter: blur(8px);
 }
